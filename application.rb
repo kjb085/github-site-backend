@@ -8,11 +8,17 @@ set :protection, false
 set :public_dir, Proc.new { File.join(root, "_site") }
 
 post '/send_email' do
+
+  Rack::Recaptcha.test_mode!
+
   if recaptcha_valid?
+
+    p "It's verifying!"
+
     res = Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
       :to => 'kjb085@gmail.com',
-      :subject => "[Website Contact] " + params[:subject],
+      :subject => "[Website Contact] " + params[:tel],
       :body => params[:message],
       :via => :smtp,
       :via_options => {
@@ -31,6 +37,9 @@ post '/send_email' do
       { :message => 'failure_email' }.to_json
     end
   else
+
+    p "Verification failed!"
+
     { :message => 'failure_captcha' }.to_json
   end
 end
