@@ -19,22 +19,17 @@ post '/send_email' do
 
     p "It's verifying!"
 
-    res = Pony.mail(
-      # :from => params[:name] + "<" + params[:email] + ">",
-      :to => 'kjb085@gmail.com',
-      :subject => "[kjb085.github.io] " + params[:email],
-      :body => params[:message],
-      :via => :smtp,
-      :via_options => {
-        :address              => 'smtp.sendgrid.net',
-        :port                 => '587',
-        :enable_starttls_auto => true,
-        :user_name            => ENV[username],
-        :password             => ENV[password],
-        :authentication       => :plain,
-        :domain               => 'heroku.com'
-      })
-    content_type :json
+    client = SendGrid:Client.new(api_user: 'app35909075@heroku.com', api_key: 'kjb141414')
+
+    email = SendGrid::mail.new do |m|
+      m.to = 'kjb085@gmail.com'
+      m.from = params[:name] + "<" + params[:email] + ">"
+      m.subject = "[kjb085.github.io] " + params[:tel]
+      m.html = params[:message]
+    end
+
+    client.send(email)
+
     if res
       { :message => 'success' }.to_json
     else
