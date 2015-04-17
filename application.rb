@@ -2,7 +2,6 @@ before do
   content_type :json
   headers['Access-Control-Allow-Origin'] = "http://kjb085.github.io"
   headers['Access-Control-Request-Method'] = ["POST"]
-  p headers
 end
 
 set :protection, false
@@ -12,8 +11,8 @@ post '/send_email' do
 
   Rack::Recaptcha.test_mode!
 
-  username = Base64.encode64('app35909075@heroku.com')
-  password = Base64.encode64('kjb141414')
+  # username = Base64.encode64('app35909075@heroku.com')
+  # password = Base64.encode64('kjb141414')
 
   if recaptcha_valid?
 
