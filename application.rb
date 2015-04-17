@@ -29,11 +29,13 @@ post '/send_email' do
 
     client.send(email)
 
-    if res
-      { :message => 'success' }.to_json
-    else
-      { :message => 'failure_email' }.to_json
-    end
+    p client.send(email)
+
+    # if 
+    #   { :message => 'success' }.to_json
+    # else
+    #   { :message => 'failure_email' }.to_json
+    # end
   else
 
     p "Verification failed!"
