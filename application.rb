@@ -1,5 +1,5 @@
 before do
-  # content_type :json
+  content_type :json
   headers['Access-Control-Allow-Origin'] = "http://kjb085.github.io"
   headers['Access-Control-Request-Method'] = ["POST"]
   p headers
@@ -11,6 +11,9 @@ set :public_dir, Proc.new { File.join(root, "_site") }
 post '/send_email' do
 
   Rack::Recaptcha.test_mode!
+
+  username = Base64.encode64('app35909075@heroku.com')
+  password = Base64.encode64('kjb141414')
 
   if recaptcha_valid?
 
@@ -26,8 +29,8 @@ post '/send_email' do
         :address              => 'smtp.sendgrid.net',
         :port                 => '587',
         :enable_starttls_auto => true,
-        :user_name            => ENV['app35909075@heroku.com'],
-        :password             => ENV['kjb141414'],
+        :user_name            => ENV[username],
+        :password             => ENV[password],
         :authentication       => :plain,
         :domain               => 'heroku.com'
       })
