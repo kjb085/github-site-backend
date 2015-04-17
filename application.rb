@@ -1,7 +1,8 @@
 before do
-  content_type :json
+  # content_type :json
   headers['Access-Control-Allow-Origin'] = "http://kjb085.github.io"
   headers['Access-Control-Request-Method'] = ["POST"]
+  p headers
 end
 
 set :protection, false
