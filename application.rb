@@ -20,7 +20,7 @@ post '/send_email' do
     p "It's verifying!"
 
     res = Pony.mail(
-      :from => params[:name] + "<app35909075@heroku.com>",
+      :from => params[:name],
       :to => 'kjb085@gmail.com',
       :subject => "[kjb085.github.io] " + params[:email],
       :body => params[:message],
