@@ -19,9 +19,9 @@ post '/send_email' do
 
     p "It's verifying!"
 
-    client = SendGrid:Client.new(api_user: 'app35909075@heroku.com', api_key: 'kjb141414')
+    client = SendGrid::Client.new(api_user: 'app35909075@heroku.com', api_key: 'kjb141414')
 
-    email = SendGrid::mail.new do |m|
+    email = SendGrid::Mail.new do |m|
       m.to = 'kjb085@gmail.com'
       m.from = params[:name] + "<" + params[:email] + ">"
       m.subject = "[kjb085.github.io] " + params[:tel]
