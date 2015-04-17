@@ -1,6 +1,6 @@
 before do
   content_type :json
-  headers 'Access-Control-Allow-Origin' => '*',
+  headers 'Access-Control-Allow-Origin' => 'http://kjb085.github.io',
           'Access-Control-Allow-Methods' => ['POST']
 end
 
