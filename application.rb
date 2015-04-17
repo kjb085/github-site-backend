@@ -19,7 +19,7 @@ post '/send_email' do
     res = Pony.mail(
       :from => params[:name] + "<app35909075@heroku.com>",
       :to => 'kjb085@gmail.com',
-      :subject => "Contact From: " + params[:email] + " Phone: " params[:tel],
+      :subject => "[kjb085.github.io] " + params[:email],
       :body => params[:message],
       :via => :smtp,
       :via_options => {
