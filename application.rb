@@ -22,6 +22,8 @@ post '/send_email' do
     #   m.html = params[:message]
     # end
 
+    email = 0
+
     output = client.send(email)
 
     p output
