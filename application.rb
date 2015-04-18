@@ -25,9 +25,9 @@ post '/send_email' do
     output = client.send(email)
 
     p output
-    p output.message\
+    p output."message"
 
-    if output.message\ == 'success'
+    if output."message" == 'success'
       {:message => 'success' }.to_json
     else
       { :message => 'failure_email' }.to_json
