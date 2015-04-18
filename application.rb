@@ -11,35 +11,25 @@ post '/send_email' do
 
   Rack::Recaptcha.test_mode!
 
-  # username = Base64.encode64('app35909075@heroku.com')
-  # password = Base64.encode64('kjb141414')
-
   if recaptcha_valid?
-
-    p "It's verifying!"
 
     client = SendGrid::Client.new(api_user: 'app35909075@heroku.com', api_key: 'kjb141414')
 
     email = SendGrid::Mail.new do |m|
       m.to = 'kjb085@gmail.com'
       m.from = params[:name] + "<" + params[:email] + ">"
-      m.subject = "[kjb085.github.io] " + params[:tel]
+      m.subject = "[kjb085.github.io] Tel:" + params[:tel]
       m.html = params[:message]
     end
 
-    client.send(email)
+    output = client.send(email)
 
-    p client.send(email)
-
-    # if 
-    #   { :message => 'success' }.to_json
-    # else
-    #   { :message => 'failure_email' }.to_json
-    # end
+    if output.message = 'success'
+      nil
+    else
+      { :message => 'failure_email' }.to_json
+    end
   else
-
-    p "Verification failed!"
-
     { :message => 'failure_captcha' }.to_json
   end
 end
