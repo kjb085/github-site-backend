@@ -15,20 +15,19 @@ post '/send_email' do
 
     client = SendGrid::Client.new(api_user: 'app35909075@heroku.com', api_key: 'kjb141414')
 
-    email = SendGrid::Mail.new do |m|
-      m.to = 'kjb085@gmail.com'
-      m.from = params[:name] + "<" + params[:email] + ">"
-      m.subject = "[kjb085.github.io] Tel:" + params[:tel]
-      m.html = params[:message]
-    end
+    # email = SendGrid::Mail.new do |m|
+    #   m.to = 'kjb085@gmail.com'
+    #   m.from = params[:name] + "<" + params[:email] + ">"
+    #   m.subject = "[kjb085.github.io] Tel:" + params[:tel]
+    #   m.html = params[:message]
+    # end
 
     output = client.send(email)
 
     p output
-    p output."message"
 
-    if output."message" == 'success'
-      {:message => 'success' }.to_json
+    if !(output.nil?)
+      { :message => 'success' }.to_json
     else
       { :message => 'failure_email' }.to_json
     end
